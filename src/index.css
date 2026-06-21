@@ -1489,3 +1489,66 @@ input:checked + .slider-round:before {
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 12px;
 }
+
+/* Navigation buttons refactoring */
+.nav-link-btn {
+  color: var(--text-secondary);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.nav-link-btn:hover, .nav-link-btn.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-btn.active {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.nav-link-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Toast Notifications styling */
+@keyframes slideIn {
+  from {
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.toast-notification {
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toast-notification.success {
+  border-left-color: var(--primary);
+}
+
+.toast-notification.info {
+  border-left-color: var(--energy);
+}
+
+.toast-notification.danger {
+  border-left-color: var(--danger);
+}
+
