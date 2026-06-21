@@ -35,6 +35,29 @@ export function useNeuralNetwork({ learningRate, epochs, datasetSize }) {
     };
   }, []);
 
+  // Main-thread fallback logic (useful for testing or non-webworker environments)
+  const runModelTrainingFallback = useCallback(() => {
+    let w = [Math.random() * 0.3, Math.random() * 0.3, Math.random() * 0.3, Math.random() * 0.3];
+    let b = Math.random() * 0.2;
+    setWeights(w);
+    setBias(b);
+    
+    // Quick synchronous fit for testing/fallback
+    const tempLossHistory = [];
+    for (let e = 1; e <= epochs; e++) {
+      tempLossHistory.push(0.02 / e);
+    }
+    setLossHistory(tempLossHistory);
+    setCurrentEpoch(epochs);
+    setIsTraining(false);
+    setModelTrained(true);
+    setConsoleLogs(prev => [
+      `[FALLBACK] Synced fallback training sequence finished.`,
+      `[MODEL] Weights: w=[${w.map(n => n.toFixed(3)).join(', ')}], b=${b.toFixed(3)}`,
+      ...prev
+    ]);
+  }, [epochs]);
+
   const runModelTraining = useCallback(() => {
     if (isTraining) return;
 
@@ -106,30 +129,7 @@ export function useNeuralNetwork({ learningRate, epochs, datasetSize }) {
       // Fallback behavior if workers aren't supported (e.g. in test envs)
       runModelTrainingFallback();
     }
-  }, [isTraining, datasetSize, epochs, learningRate]);
-
-  // Main-thread fallback logic (useful for testing or non-webworker environments)
-  const runModelTrainingFallback = () => {
-    let w = [Math.random() * 0.3, Math.random() * 0.3, Math.random() * 0.3, Math.random() * 0.3];
-    let b = Math.random() * 0.2;
-    setWeights(w);
-    setBias(b);
-    
-    // Quick synchronous fit for testing/fallback
-    const tempLossHistory = [];
-    for (let e = 1; e <= epochs; e++) {
-      tempLossHistory.push(0.02 / e);
-    }
-    setLossHistory(tempLossHistory);
-    setCurrentEpoch(epochs);
-    setIsTraining(false);
-    setModelTrained(true);
-    setConsoleLogs(prev => [
-      `[FALLBACK] Synced fallback training sequence finished.`,
-      `[MODEL] Weights: w=[${w.map(n => n.toFixed(3)).join(', ')}], b=${b.toFixed(3)}`,
-      ...prev
-    ]);
-  };
+  }, [isTraining, datasetSize, epochs, learningRate, runModelTrainingFallback]);
 
   const runModelPrediction = useCallback((e) => {
     if (e) e.preventDefault();

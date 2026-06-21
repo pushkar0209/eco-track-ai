@@ -27,8 +27,8 @@ export function DigitalTwin({
     const currentSimFootprintTons = Math.max(0, emissions.grossTotalTons - activeReductionsTons);
     const neededOffsetsTons = Math.max(0, currentSimFootprintTons - offsetTons);
     
-    let advice = '';
-    let rating = 'Bronze standard plan';
+    let advice;
+    let rating;
     if (neededOffsetsTons === 0) {
       advice = 'Excellent! Your simulated lifestyle coupled with current offsets achieves full net Carbon Neutrality! 🎉';
       rating = 'Carbon Neutral Plan';

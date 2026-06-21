@@ -8,8 +8,6 @@ export function Dashboard({
   emissions,
   offsetTons,
   netFootprint,
-  ecoScore,
-  streak,
   habits,
   goals,
   newGoalTitle,

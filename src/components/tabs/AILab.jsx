@@ -1,4 +1,4 @@
-import { Play, Sparkles, BrainCircuit, RefreshCw, Cpu, Activity, Award } from 'lucide-react';
+import { Play, BrainCircuit, RefreshCw, Cpu, Activity } from 'lucide-react';
 import { useMemo } from 'react';
 
 /**

@@ -310,7 +310,7 @@ function App() {
 
       setMessages(prev => [...prev, { sender: 'coach', text: responseText }]);
     }, 600);
-  }, [emissions, streak]);
+  }, [emissions, streak, chatInput]);
 
   // Digital Twin state calculations
   const [dtSolar, setDtSolar] = useState(false);
@@ -444,8 +444,6 @@ function App() {
             emissions={emissions}
             offsetTons={offsetTons}
             netFootprint={netFootprint}
-            ecoScore={ecoScore}
-            streak={streak}
             habits={habits}
             goals={goals}
             newGoalTitle={newGoalTitle}
@@ -487,7 +485,6 @@ function App() {
           <AICoach
             emissions={emissions}
             diet={diet}
-            streak={streak}
             messages={messages}
             chatInput={chatInput}
             setChatInput={setChatInput}

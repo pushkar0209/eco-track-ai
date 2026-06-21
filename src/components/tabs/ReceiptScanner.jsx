@@ -1,4 +1,4 @@
-import { Check, Info, FileText } from 'lucide-react';
+import { Info, FileText } from 'lucide-react';
 
 /**
  * ReceiptScanner Tab Component.

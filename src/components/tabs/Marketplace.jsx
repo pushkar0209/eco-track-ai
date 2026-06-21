@@ -1,4 +1,4 @@
-import { Info, ShieldCheck, Heart } from 'lucide-react';
+import { ShieldCheck, Heart } from 'lucide-react';
 import { useState } from 'react';
 
 /**

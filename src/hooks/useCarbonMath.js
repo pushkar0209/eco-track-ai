@@ -114,19 +114,49 @@ export function calculateCarbonEmissions({
  * Standardizes calculation logic and provides memoized carbon telemetry.
  */
 export function useCarbonMath(params) {
-  return useMemo(() => calculateCarbonEmissions(params), [
-    params.carKm,
-    params.flightKm,
-    params.transitKm,
-    params.electricityKwh,
-    params.gasTherms,
-    params.waterGallons,
-    params.diet,
-    params.clothesItems,
-    params.electronicsItems,
-    params.deliveriesCount,
-    params.useAiModel,
-    params.modelWeights,
-    params.modelBias
+  const {
+    carKm,
+    flightKm,
+    transitKm,
+    electricityKwh,
+    gasTherms,
+    waterGallons,
+    diet,
+    clothesItems,
+    electronicsItems,
+    deliveriesCount,
+    useAiModel,
+    modelWeights,
+    modelBias
+  } = params;
+
+  return useMemo(() => calculateCarbonEmissions({
+    carKm,
+    flightKm,
+    transitKm,
+    electricityKwh,
+    gasTherms,
+    waterGallons,
+    diet,
+    clothesItems,
+    electronicsItems,
+    deliveriesCount,
+    useAiModel,
+    modelWeights,
+    modelBias
+  }), [
+    carKm,
+    flightKm,
+    transitKm,
+    electricityKwh,
+    gasTherms,
+    waterGallons,
+    diet,
+    clothesItems,
+    electronicsItems,
+    deliveriesCount,
+    useAiModel,
+    modelWeights,
+    modelBias
   ]);
 }

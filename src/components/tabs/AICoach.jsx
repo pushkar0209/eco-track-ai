@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react';
 export function AICoach({
   emissions,
   diet,
-  streak,
   messages,
   chatInput,
   setChatInput,
